@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+    <title>Page d'accueil</title>
+    <style>
+        body {
+            font-family: 'Permanent Marker', cursive; 
+            text-align: center;
+            background-image: url('file:///C:/Users/Utilisateur/Desktop/DevA/Image A/Capture d\'écran 2024-10-26 142728.png');
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            height: 100vh; 
+            margin: 0; 
+            color: white; 
+            padding: 20px; 
+        }
+
+        h1 {
+            color: rgb(1, 1, 14); 
+            margin-top: 130px; 
+            margin-bottom: 20px; 
+        }
+
+        .button-container {
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            margin: 20px 0; 
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px; 
+            margin: 10px; 
+            background-color: #17202a; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            transition: background-color 0.3s; 
+        }
+
+        .button:hover {
+            background-color: #0056b3; 
+        }
+
+        .container {
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            margin: 20px 0; 
+        }
+
+        .audio-container, .login-container, .search-container, .chat-container {
+            background-color: #1e1e1e; 
+            border: 3px solid #e03008; 
+            padding: 10px;
+            margin: 10px; 
+            border-radius: 10px; 
+            max-width: 400px; 
+            flex: 1; 
+        }
+
+        .audio-controls button, .login-container button {
+            margin-right: 5px;
+            background-color: #444; 
+            color: #ffffff; 
+            border: 1px solid #FF5733; 
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px; 
+        }
+
+        .chat-container {
+            height: 360px; /* Réduit de 10px */
+            overflow-y: auto; 
+            border-radius: 10px; 
+            display: flex;
+            flex-direction: column; 
+            text-align: left; /* Aligne le texte à gauche */
+        }
+
+        #messages {
+            flex-grow: 1; 
+            overflow-y: auto; 
+            margin-bottom: 10px; 
+        }
+
+        .message {
+            text-align: left; /* Aligne les messages à gauche */
+            margin: 5px 0; /* Espace entre les messages */
+        }
+
+        .text-input {
+            width: calc(100% - 22px); 
+            padding: 10px; 
+            margin: 10px 0; 
+            background-color: #19b0c4; 
+            color: #000000; 
+            border: 1px solid #fff; 
+            border-radius: 5px; 
+            font-size: 16px; 
+        }
+
+        .text-input::placeholder {
+            color: #cc0b0b; 
+            opacity: 0.7; 
+        }
+
+        .audio-container {
+            text-align: center; 
+        }
+
+        .audio-container audio {
+            width: 100%; 
+            max-width: 300px; 
+            background-color: #123b69; 
+            color: white; 
+            border-radius: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Jack Lantern</h1>
+
+    <div class="button-container">
+        <a href="page1.html" class="button">Accueil</a>
+        <a href="page2.html" class="button">Patch</a>
+        <a href="page3.html" class="button">Rôle</a>
+        <a href="page4.html" class="button">Boutique</a>
+        <a href="page5.html" class="button">Faction</a>
+    </div>
+
+    <div class="container">
+        <div class="search-container">
+            <h2>Recherche :</h2>
+            <input type="text" class="text-input" placeholder="Rechercher..." id="searchInput" oninput="searchMessages()">
+        </div>
+
+        <div class="login-container">
+            <h2>Connexion :</h2>
+            <input type="text" class="text-input" placeholder="Nom d'utilisateur" id="username">
+            <input type="password" class="text-input" placeholder="Mot de passe" id="password">
+            <button onclick="login()">Se connecter</button>
+        </div>
+
+        <div class="audio-container">
+            <h2>Écoutez notre musique :</h2>
+            <audio id="audioPlayer" controls>
+                <source src="musique/★Nightcore - Firebird.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas la lecture de l'audio.
+            </audio>
+            <div class="audio-controls">
+                <button onclick="replay()">Replay</button>
+                <button onclick="skip(-10)">Reculer 10s</button>
+                <button onclick="skip(10)">Avancer 10s</button>
+                <button onclick="toggleLoop()">Boucle</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+        <h2>Chat :</h2>
+        <div id="messages"></div>
+        <textarea id="chatInput" class="text-input" placeholder="Écrivez votre message..."></textarea>
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+
+    <script>
+        function login() {
+            // Fonction de connexion à définir
+        }
+
+        function searchMessages() {
+            // Fonction de recherche à définir
+        }
+
+        function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const messagesDiv = document.getElementById('messages');
+            const message = chatInput.value.trim();
+
+            if (message) {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message'); // Ajout de la classe pour le style
+                messageElement.textContent = `[${timeString}] ${message}`;
+                messagesDiv.appendChild(messageElement);
+                chatInput.value = ''; // Réinitialiser le champ de saisie
+                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Faire défiler vers le bas
+            }
+        }
+
+        function replay() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.currentTime = 0; // Revenir au début
+            audioPlayer.play();
+        }
+
+        function skip(seconds) {
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.currentTime += seconds; // Avancer ou reculer
+        }
+
+        function toggleLoop() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.loop = !audioPlayer.loop; // Activer/désactiver la boucle
+        }
+    </script>
+</body>
+</html>
+

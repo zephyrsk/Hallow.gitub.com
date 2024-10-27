@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://js.stripe.com/v3/"></script> <!-- Ajouter Stripe.js -->
+    <title>Page d'accueil</title>
+</head>
+<body>
+    <h1 style="font-family: 'Permanent Marker', cursive;">Welcome to the Jack Lantern</h1>
+
+    <div class="button-container">
+        <a href="page1.html" class="button">Accueil</a>
+        <a href="page2.html" class="button">Patch</a>
+        <a href="page3.html" class="button">Rôle</a>
+        <a href="page4.html" class="button">Boutique</a>
+        <a href="page5.html" class="button">Faction</a>
+    </div>
+
+    <h2>Payer</h2>
+    <form id="payment-form">
+        <div id="card-element"><!-- Élément de carte de crédit --></div>
+        <button id="submit">Payer</button>
+        <div id="payment-result"></div>
+    </form>
+
+    <script>
+        // Initialiser Stripe avec votre clé publique
+        const stripe = Stripe('votre_clé_publique_stripe');
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        // Gérer le formulaire de paiement
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const {paymentMethod, error} = await stripe.createPaymentMethod({
+                type: 'card',
+                card: cardElement,
+            });
+            if (error) {
+                // Afficher une erreur au client
+                document.getElementById('payment-result').innerText = error.message;
+            } else {
+                // Envoyer le paymentMethod.id à votre serveur pour le traitement
+                document.getElementById('payment-result').innerText = 'Paiement réussi : ' + paymentMethod.id;
+                // Ici, vous pouvez également rediriger ou afficher une confirmation
+            }
+        });
+    </script>
+</body>
+</html>
