@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: 'Permanent Marker', cursive; 
-            text-align: center;
+            text-align: left; /* Alignement à gauche */
             background-image: url('image/H.png'); 
             background-size: cover; 
             background-position: center; 
@@ -25,7 +25,7 @@
 
         h1 {
             color: rgb(1, 1, 14); 
-            margin-top: 130px; 
+            margin-top: 20px; 
             margin-bottom: 20px; 
         }
 
@@ -58,11 +58,11 @@
             margin: 20px 0; 
         }
 
-        .audio-container, .login-container, .search-container, .chat-container {
+        .audio-container, .login-container, .chat-container {
             background-color: #1e1e1e; 
             border: 3px solid #e03008; 
             padding: 10px;
-            margin: 10px; 
+            margin: 10px 0; /* Espace entre les conteneurs */
             border-radius: 10px; 
             max-width: 400px; 
             flex: 1; 
@@ -130,14 +130,6 @@
 <body>
     <h1>Welcome to the Jack Lantern</h1>
 
-    <div class="button-container">
-        <a href="page1.html" class="button">Accueil</a>
-        <a href="page2.html" class="button">Patch</a>
-        <a href="page3.html" class="button">Rôle</a>
-        <a href="page4.html" class="button">Boutique</a>
-        <a href="page5.html" class="button">Faction</a>
-    </div>
-
     <div class="login-container">
         <h2>Connexion :</h2>
         <input type="text" class="text-input" placeholder="Nom d'utilisateur" id="username">
@@ -168,16 +160,20 @@
         <button onclick="sendMessage()">Envoyer</button>
     </div>
 
+    <div class="button-container">
+        <a href="page1.html" class="button">Accueil</a>
+        <a href="page2.html" class="button">Patch</a>
+        <a href="page3.html" class="button">Rôle</a>
+        <a href="page4.html" class="button">Boutique</a>
+        <a href="page5.html" class="button">Faction</a>
+    </div>
+
     <script>
         let audioPlayer = document.getElementById('audioPlayer');
         let isPlaying = false;
 
         function login() {
             // Fonction de connexion à définir
-        }
-
-        function searchMessages() {
-            // Fonction de recherche à définir
         }
 
         function sendMessage() {
