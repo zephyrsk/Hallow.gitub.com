@@ -6,12 +6,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Si vous utilisez Font Awesome -->
+    <link rel="stylesheet" href="https://icofont.com/icofont.css"> <!-- Ajoutez ceci si vous utilisez IcoFont -->
     <title>Page d'accueil</title>
     <style>
         body {
             font-family: 'Permanent Marker', cursive; 
             text-align: center;
-            background-image: url('https://github.com/zephyrsk/Hallow.gitub.com/blob/main/image/H.png?raw=true'); /* Utilisez des barres obliques pour le chemin */
+            background-image: url('image/H.png'); 
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat; 
@@ -77,12 +79,12 @@
         }
 
         .chat-container {
-            height: 360px; /* Réduit de 10px */
+            height: 360px; 
             overflow-y: auto; 
             border-radius: 10px; 
             display: flex;
             flex-direction: column; 
-            text-align: left; /* Aligne le texte à gauche */
+            text-align: left; 
         }
 
         #messages {
@@ -92,8 +94,8 @@
         }
 
         .message {
-            text-align: left; /* Aligne les messages à gauche */
-            margin: 5px 0; /* Espace entre les messages */
+            text-align: left; 
+            margin: 5px 0; 
         }
 
         .text-input {
@@ -156,10 +158,10 @@
                 Votre navigateur ne supporte pas la lecture de l'audio.
             </audio>
             <div class="audio-controls">
-                <button onclick="replay()">Replay</button>
-                <button onclick="skip(-10)">Reculer 10s</button>
-                <button onclick="skip(10)">Avancer 10s</button>
-                <button onclick="toggleLoop()">Boucle</button>
+                <button onclick="replay()"><i class="icofont-ui-rotation"></i></button>
+                <button onclick="skip(-10)"><i class="fas fa-backward"></i></button>
+                <button onclick="skip(10)"><i class="fas fa-forward"></i></button>
+                <button onclick="toggleLoop()"><i class="fas fa-sync"></i></button>
             </div>
         </div>
     </div>
@@ -189,30 +191,29 @@
                 const now = new Date();
                 const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
                 const messageElement = document.createElement('div');
-                messageElement.classList.add('message'); // Ajout de la classe pour le style
+                messageElement.classList.add('message');
                 messageElement.textContent = `[${timeString}] ${message}`;
                 messagesDiv.appendChild(messageElement);
-                chatInput.value = ''; // Réinitialiser le champ de saisie
-                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Faire défiler vers le bas
+                chatInput.value = '';
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
             }
         }
 
         function replay() {
             const audioPlayer = document.getElementById('audioPlayer');
-            audioPlayer.currentTime = 0; // Revenir au début
+            audioPlayer.currentTime = 0; 
             audioPlayer.play();
         }
 
         function skip(seconds) {
             const audioPlayer = document.getElementById('audioPlayer');
-            audioPlayer.currentTime += seconds; // Avancer ou reculer
+            audioPlayer.currentTime += seconds; 
         }
 
         function toggleLoop() {
             const audioPlayer = document.getElementById('audioPlayer');
-            audioPlayer.loop = !audioPlayer.loop; // Activer/désactiver la boucle
+            audioPlayer.loop = !audioPlayer.loop; 
         }
     </script>
 </body>
 </html>
-
