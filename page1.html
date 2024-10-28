@@ -8,8 +8,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css"> <!-- Vérifiez le nom de votre fichier CSS -->
     <title>Page d'accueil</title>
+    <style>
+        body {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fog {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7); /* Couleur et opacité de la brume */
+            opacity: 1; /* Opacité initiale */
+            transition: opacity 4s ease; /* Transition pour l'effet de dissipation */
+            z-index: 1; /* Assure que la brume est au-dessus du fond */
+        }
+
+        .button-container {
+            position: relative;
+            z-index: 2; /* Les boutons au-dessus de la brume */
+        }
+    </style>
 </head>
 <body>
+    <div class="fog"></div>
     <h1 style="font-family: 'Permanent Marker', cursive;">Welcome to the Jack Lantern</h1>
     <div class="button-container">
         <a href="page1.html" class="button">Accueil</a>
@@ -18,5 +42,14 @@
         <a href="page4.html" class="button">Boutique</a>
         <a href="page5.html" class="button">Faction</a>
     </div>
+    <script>
+        window.onload = function() {
+            const fog = document.querySelector('.fog');
+            setTimeout(() => {
+                fog.style.opacity = 0; // Change l'opacité pour faire disparaître la brume
+            }, 1000); // Démarre après 1 seconde
+        };
+    </script>
 </body>
 </html>
+
