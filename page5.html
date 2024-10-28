@@ -138,82 +138,90 @@
         <a href="page5.html" class="button">Faction</a>
     </div>
 
-    <div class="container">
-        <div class="search-container">
-            <h2>Recherche :</h2>
-            <input type="text" class="text-input" placeholder="Rechercher..." id="searchInput" oninput="searchMessages()">
-        </div>
-
-        <div class="login-container">
-            <h2>Connexion :</h2>
-            <input type="text" class="text-input" placeholder="Nom d'utilisateur" id="username">
-            <input type="password" class="text-input" placeholder="Mot de passe" id="password">
-            <button onclick="login()">Se connecter</button>
-        </div>
-
-        <div class="audio-container">
-            <h2>Écoutez notre musique :</h2>
-            <audio id="audioPlayer" controls>
-                <source src="musique/★Nightcore - Firebird.mp3" type="audio/mpeg">
-                Votre navigateur ne supporte pas la lecture de l'audio.
-            </audio>
-            <div class="audio-controls">
-                <button onclick="replay()"><i class="icofont-ui-rotation"></i></button>
-                <button onclick="skip(-10)"><i class="fas fa-backward"></i></button>
-                <button onclick="skip(10)"><i class="fas fa-forward"></i></button>
-                <button onclick="toggleLoop()"><i class="fas fa-sync"></i></button>
-            </div>
-        </div>
+    <div class="login-container">
+    <h2>Connexion :</h2>
+    <input type="text" class="text-input" placeholder="Nom d'utilisateur" id="username">
+    <input type="password" class="text-input" placeholder="Mot de passe" id="password">
+    <button onclick="login()">Se connecter</button>
+</div>
+<div class="audio-container">
+    <h2>Écoutez notre musique :</h2>
+    <audio id="audioPlayer" controls>
+        <source src="musique/★Nightcore - Firebird.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas la lecture de l'audio.
+    </audio>
+    <div class="audio-controls">
+        <button onclick="playPause()"><i class="icofont-play-pause"></i></button> <!-- Bouton Play/Pause -->
+        <button onclick="replay()"><i class="icofont-ui-rotation"></i></button>
+        <button onclick="skip(-10)"><i class="fas fa-backward"></i></button>
+        <button onclick="skip(10)"><i class="fas fa-forward"></i></button>
+        <button onclick="toggleLoop()"><i class="fas fa-sync"></i></button>
     </div>
+</div>
+</div>
 
-    <div class="chat-container" id="chatContainer">
-        <h2>Chat :</h2>
-        <div id="messages"></div>
-        <textarea id="chatInput" class="text-input" placeholder="Écrivez votre message..."></textarea>
-        <button onclick="sendMessage()">Envoyer</button>
-    </div>
+<div class="chat-container" id="chatContainer">
+    <h2>Chat :</h2>
+    <div id="messages"></div>
+    <textarea id="chatInput" class="text-input" placeholder="Écrivez votre message..."></textarea>
+    <button onclick="sendMessage()">Envoyer</button>
+</div>
 
-    <script>
-        function login() {
-            // Fonction de connexion à définir
+<script>
+    let isPlaying = false; // État de lecture
+
+    function login() {
+        // Fonction de connexion à définir
+    }
+
+    function searchMessages() {
+        // Fonction de recherche à définir
+    }
+
+    function sendMessage() {
+        const chatInput = document.getElementById('chatInput');
+        const messagesDiv = document.getElementById('messages');
+        const message = chatInput.value.trim();
+
+        if (message) {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.textContent = `[${timeString}] ${message}`;
+            messagesDiv.appendChild(messageElement);
+            chatInput.value = '';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
+    }
 
-        function searchMessages() {
-            // Fonction de recherche à définir
-        }
+    function replay() {
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.currentTime = 0; 
+        audioPlayer.play();
+    }
 
-        function sendMessage() {
-            const chatInput = document.getElementById('chatInput');
-            const messagesDiv = document.getElementById('messages');
-            const message = chatInput.value.trim();
+    function skip(seconds) {
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.currentTime += seconds; 
+    }
 
-            if (message) {
-                const now = new Date();
-                const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message');
-                messageElement.textContent = `[${timeString}] ${message}`;
-                messagesDiv.appendChild(messageElement);
-                chatInput.value = '';
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }
-        }
+    function toggleLoop() {
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.loop = !audioPlayer.loop; 
+    }
 
-        function replay() {
-            const audioPlayer = document.getElementById('audioPlayer');
-            audioPlayer.currentTime = 0; 
+    function playPause() {
+        const audioPlayer = document.getElementById('audioPlayer');
+
+        if (isPlaying) {
+            audioPlayer.pause();
+        } else {
             audioPlayer.play();
         }
 
-        function skip(seconds) {
-            const audioPlayer = document.getElementById('audioPlayer');
-            audioPlayer.currentTime += seconds; 
-        }
-
-        function toggleLoop() {
-            const audioPlayer = document.getElementById('audioPlayer');
-            audioPlayer.loop = !audioPlayer.loop; 
-        }
-    </script>
+        isPlaying = !isPlaying; // Inverse l'état de lecture
+    }
+</script>
 </body>
 </html>
